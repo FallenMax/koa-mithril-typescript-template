@@ -1,0 +1,45 @@
+{
+  "name": "koa-mithril-typescript-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "FallenMax <FallenMax@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/koa": "^2.0.39",
+    "@types/koa-bodyparser": "^3.0.25",
+    "@types/koa-compress": "^2.0.7",
+    "@types/koa-logger": "^2.0.2",
+    "@types/koa-static": "^3.0.1",
+    "@types/mithril": "^1.1.8",
+    "browser-sync": "^2.18.13",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "html-webpack-plugin": "^2.30.1",
+    "nodemon": "^1.12.1",
+    "style-loader": "^0.18.2",
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.5.3",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "3"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "yarn run build:server & yarn run build:client",
+    "watch": "yarn run watch:server & yarn run watch:client",
+    "build:client": "ENV=production webpack --config ./src/client/webpack.config.js",
+    "watch:client": "ENV=dev webpack --config ./src/client/webpack.config.js --watch & browser-sync start --port 3001 --proxy localhost:3000 --files './dist/public' ",
+    "build:server": "ENV=production tsc --project ./src/server",
+    "watch:server": "ENV=dev tsc --project ./src/server --watch & nodemon dist/server/index.js --watch dist/server"
+  },
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-compress": "^2.0.0",
+    "koa-logger": "^3.1.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^4.0.1",
+    "koa-views": "^6.1.0",
+    "mithril": "^1.1.4"
+  }
+}
